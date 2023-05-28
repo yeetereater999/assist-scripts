@@ -1,0 +1,28 @@
+#!/bin/bash
+
+echo "pacman assist script"
+
+echo "type 'u' to update, 'i' to (re)install a package, or 'r' for removing a package"
+
+#prompt
+read -p "What would you like to do? " choice "update" "delete" "list"
+
+# Update the database if the user chose `update`
+if [[ $choice == "u" ]]; then
+  echo "updating the system..."
+  sudo pacman -Syu
+fi
+
+# Delete a record if the user chose `delete`
+if [[ $choice == "r" ]]; then
+  echo "what package would you like to remove?"
+  read -p "enter package for removal: " package
+  sudo pacman -Runs $package
+fi
+
+# List the records if the user chose `list`
+if [[ $choice == "i" ]]; then
+  echo "what package would you like to (re)install?"
+  read -p "enter package for installation: " package
+  sudo pacman -S $package
+fi
