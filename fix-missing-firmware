@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# fix "possibly missing firmware for module "xxxx"
+
+echo "this will take up some space, press ctrl+c to abort."
+sleep 5
+
+sudo pacman -Syu
+# get some firmware and things required for building, and cloning the repositories
+sudo pacman -S git linux-firmware-qlogic linux-firmware-bnx2x linux-firmware-liquidio linux-firmware-mellanox linux-firmware-nfp lha
+
+# make dir named "git" to organize downloaded aur packages
+
+mkdir git && cd git
+
+# clone the repositories for missing firmware
+git clone https://aur.archlinux.org/aic94xx-firmware.git
+git clone https://aur.archlinux.org/ast-firmware.git
+git clone https://aur.archlinux.org/wd719x-firmware.git
+git clone https://aur.archlinux.org/upd72020x-fw.git
+
+# install the packages one by one
+cd aic94xx-firmware
+makepkg
+sudo pacman -U *pkg.tar.zst
+cd ..
+cd ast-firmware
+makepkg
+sudo pacman -U *pkg.tar.zst
+cd ..
+cd wd719x-firmware
+makepkg
+sudo pacman -U *pkg.tar.zst
+cd ..
+cd upd72020x-fw
+makepkg
+sudo pacman -U *pkg.tar.zst
+
+# say that the firmware has been installed and remind the user to run mkinitcpio
+echo "installation complete. run mkinitcpio when ready"
