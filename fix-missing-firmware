@@ -2,7 +2,7 @@
 
 # fix "possibly missing firmware for module "xxxx"
 
-echo "this will take up some space, press ctrl+c to abort."
+echo "this will take up some space, and is for arch linux. press ctrl+c to abort."
 sleep 5
 
 sudo pacman -Syu
