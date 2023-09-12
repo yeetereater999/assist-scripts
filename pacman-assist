@@ -23,6 +23,8 @@ fi
 # (re)installs a package if the user chose `i`
 if [[ $choice == "i" ]]; then
   echo "what package would you like to (re)install?"
-  read -p "enter package for installation: " package
+  read -p "enter package for (re)installation: " package
   sudo pacman -S $package
 fi
+
+
